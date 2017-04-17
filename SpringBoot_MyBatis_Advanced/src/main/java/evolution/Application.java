@@ -1,5 +1,7 @@
 package evolution;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -15,8 +17,8 @@ public class Application implements CommandLineRunner {
 	
 	@Override
 	public void run(String... arg0) throws Exception {
-		AnyEntity anyEntity = anyMapper.select("Chen");// The SQL statement is written within @Select. 
-		System.out.println(anyEntity);
+		List<AnyEntity> anyEntities = anyMapper.selectByName("Chen");// The SQL statement is written within @Select. 
+		System.out.println(anyEntities);
 	}
 	
 	public static void main(String[] args) {
