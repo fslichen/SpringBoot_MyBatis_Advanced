@@ -3,7 +3,6 @@ package evolution.dao;
 import javax.sql.DataSource;
 
 import org.apache.ibatis.datasource.pooled.PooledDataSource;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
@@ -46,16 +45,6 @@ public class DaoConfiguration {
 		sessionFactory.setDataSource(dataSource());
 		return sessionFactory;
 	}
-	
-	@Bean// Inject SqlSessionFactory
-	public SqlSessionFactory sqlSessionFactory() {
-		try {
-			return sqlSessionFactoryBean().getObject();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
 
 	@Bean// Inject DataSourceTransactionManager
 	public DataSourceTransactionManager transactionManager() {
@@ -63,7 +52,7 @@ public class DaoConfiguration {
 	}
 	
 	@Bean// Inject SqlSessionTemplate
-	public SqlSessionTemplate sqlSessionTemplate() {
-		return new SqlSessionTemplate(sqlSessionFactory());
+	public SqlSessionTemplate sqlSessionTemplate() throws Exception {
+		return new SqlSessionTemplate(sqlSessionFactoryBean().getObject());
 	}
 }
