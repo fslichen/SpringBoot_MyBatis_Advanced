@@ -23,8 +23,10 @@ public class Application implements CommandLineRunner {
 	public void run(String... arg0) throws Exception {
 		List<AnyEntity> anyEntities = anyMapper.selectByName("Chen");// The SQL statement is written within @Select. 
 		System.out.println(anyEntities);
-		Object anyEntity = sqlSessionTemplate.selectOne(AnyMapper.class.getName() + ".selectByName", "Chen");// Call selectByName() manually in AnyMapper by SqlSessionTemplate. 
-		System.out.println(anyEntity);
+		Object anyEntity0 = sqlSessionTemplate.selectOne(AnyMapper.class.getName() + ".selectByName", "Chen");// Call selectByName() manually in AnyMapper by SqlSessionTemplate. 
+		System.out.println(anyEntity0);
+		AnyEntity anyEntity1 = anyMapper.selectById(1);
+		System.out.println(anyEntity1);
 	}
 	
 	public static void main(String[] args) {
